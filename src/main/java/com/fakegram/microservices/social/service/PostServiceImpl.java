@@ -3,6 +3,7 @@ package com.fakegram.microservices.social.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,6 +18,8 @@ public class PostServiceImpl implements PostService {
 	private PostRepository postRepo;
 	@Autowired
 	private RestTemplate restTemplate;
+	@Value("${profilesEndpoint}")
+	private String profilesEndpoint; 
 
 	@Override
 	public List<PostDTO> findAllPosts() {
@@ -32,10 +35,10 @@ public class PostServiceImpl implements PostService {
 	public PostDTO findPostById(String idPost) {
 		PostDTO postDTO = PostUtils.postEntityToDTO(postRepo.findById(idPost).orElse(null));
 		ProfileDTO profileDTO = 
-				restTemplate.getForObject(null, ProfileDTO.class);
+				restTemplate.getForObject(profilesEndpoint + postDTO.getIdProfile(), ProfileDTO.class);
+		postDTO.setProfileDTO(profileDTO);
 		
-		
-		return PostUtils.postEntityToDTO(postRepo.findById(idPost).orElse(null));
+		return postDTO;
 	}
 
 	@Override

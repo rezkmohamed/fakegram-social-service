@@ -25,7 +25,6 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 	
-	
 	@GetMapping("")
 	public ResponseEntity<List<PostDTO>> getAllPosts(){
 		List<PostDTO> posts = postService.findAllPosts();
