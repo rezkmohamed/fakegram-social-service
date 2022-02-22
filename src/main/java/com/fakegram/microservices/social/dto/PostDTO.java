@@ -8,6 +8,7 @@ public class PostDTO {
 	private String description;
 	private Date date;
 	private String idProfile;
+	private ProfileDTO profileDTO;
 	
 	public PostDTO() {
 		super();
@@ -60,5 +61,13 @@ public class PostDTO {
 
 	public void setIdProfile(String idProfile) {
 		this.idProfile = idProfile;
+	}
+
+	public ProfileDTO getProfileDTO() {
+		return profileDTO;
+	}
+
+	public void setProfileDTO(ProfileDTO profileDTO) {
+		this.profileDTO = profileDTO;
 	}
 }
