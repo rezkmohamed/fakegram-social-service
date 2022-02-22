@@ -20,7 +20,7 @@ import com.fakegram.microservices.social.service.PostService;
 
 
 @RestController
-@RequestMapping("/posts")
+@RequestMapping("/social/posts")
 public class PostController {
 	@Autowired
 	private PostService postService;
