@@ -28,6 +28,9 @@ public class Comment {
 	@Column(name="date")
 	private Date date;
 	
+	@Column(name="id_profile")
+	private String idProfile;
+	
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, 
             CascadeType.REFRESH, CascadeType.DETACH})
 	@JoinColumn(name="id_post")
@@ -37,11 +40,12 @@ public class Comment {
 		super();
 	}
 
-	public Comment(String idComment, String comment, Date date, com.fakegram.microservices.social.entity.Post post) {
+	public Comment(String idComment, String comment, Date date, String idProfile, Post post) {
 		super();
 		this.idComment = idComment;
 		this.comment = comment;
 		this.date = date;
+		this.idProfile = idProfile;
 		this.post = post;
 	}
 
@@ -75,5 +79,13 @@ public class Comment {
 
 	public void setPost(Post post) {
 		this.post = post;
+	}
+
+	public String getIdProfile() {
+		return idProfile;
+	}
+
+	public void setIdProfile(String idProfile) {
+		this.idProfile = idProfile;
 	}
 }

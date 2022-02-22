@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fakegram.microservices.social.dto.CommentDTO;
+import com.fakegram.microservices.social.entity.Comment;
 import com.fakegram.microservices.social.repo.CommentRepository;
+import com.fakegram.microservices.social.repo.PostRepository;
 import com.fakegram.microservices.social.utils.CommentUtils;
 
 @Service
 public class CommentServiceImpl implements CommentService {
 	@Autowired
 	private CommentRepository commentRepo;
+	@Autowired
+	private PostRepository postRepo;
 	
 	@Override
 	public List<CommentDTO> findAllCommentsForPost(String idPost) {
@@ -25,6 +29,9 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public String addComment(CommentDTO commentDTO) {
-		return commentRepo.save(CommentUtils.commentDTOToEntity(commentDTO)).getIdComment();
+		Comment comment = CommentUtils.commentDTOToEntity(commentDTO);
+		comment.setPost(postRepo.getById(commentDTO.getIdPost()));
+		
+		return commentRepo.save(comment).getIdComment();
 	}
 }
