@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.fakegram.microservices.social.dto.PostDTO;
 import com.fakegram.microservices.social.repo.PostRepository;
+import com.fakegram.microservices.social.utils.PostUtils;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -15,31 +16,34 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<PostDTO> findAllPosts() {
-		// TODO Auto-generated method stub
-		return null;
+		return PostUtils.postEntityToDTO(postRepo.findAll());
 	}
 
 	@Override
 	public List<PostDTO> findPostsForProfile(String idProfile) {
-		// TODO Auto-generated method stub
-		return null;
+		return PostUtils.postEntityToDTO(postRepo.findByIdProfile(idProfile));
 	}
 
 	@Override
 	public PostDTO findPostById(String idPost) {
-		// TODO Auto-generated method stub
-		return null;
+		return PostUtils.postEntityToDTO(postRepo.findById(idPost).orElse(null));
 	}
 
 	@Override
 	public String savePost(PostDTO post) {
-		// TODO Auto-generated method stub
-		return null;
+		return postRepo.save(PostUtils.postDTOToEntity(post)).getIdPost();
 	}
 
 	@Override
 	public boolean deletePostById(String idPost) {
-		// TODO Auto-generated method stub
+		try {
+			postRepo.deleteById(idPost);
+			
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}		
+		
 		return false;
 	}
 
