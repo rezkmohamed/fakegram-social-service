@@ -10,6 +10,10 @@ public class PostUtils {
 		/**
 		 * TODO
 		 */
+		PostDTO postDTO = new PostDTO();
+		
+		
+		
 		return null;
 	}
 	
