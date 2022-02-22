@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,13 +14,14 @@ import com.fakegram.microservices.social.repo.PostRepository;
 import com.fakegram.microservices.social.utils.PostUtils;
 
 @Service
+@PropertySource("classpath:application.properties")
 public class PostServiceImpl implements PostService {
 	@Autowired
 	private PostRepository postRepo;
 	@Autowired
 	private RestTemplate restTemplate;
-	@Value("${profilesEndpoint}")
-	private String profilesEndpoint; 
+//	@Value("${profilesEndpoint}")
+	private String profilesEndpoint = "http://localhost:8090/auth/profiles/"; 
 
 	@Override
 	public List<PostDTO> findAllPosts() {
