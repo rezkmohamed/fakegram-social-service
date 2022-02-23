@@ -22,10 +22,10 @@ public class Comment {
 	@Column(name="id_comment")
 	private String idComment;
 	
-	@Column(name="comment")
+	@Column(name="comment_string")
 	private String comment;
 	
-	@Column(name="date")
+	@Column(name="date_comment")
 	private Date date;
 	
 	@Column(name="id_profile")
