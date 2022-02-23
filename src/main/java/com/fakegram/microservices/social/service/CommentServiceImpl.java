@@ -1,6 +1,6 @@
 package com.fakegram.microservices.social.service;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +21,10 @@ public class CommentServiceImpl implements CommentService {
 	
 	@Override
 	public List<CommentDTO> findAllCommentsForPost(String idPost) {
-		List<String> id = new ArrayList<String>();
-		id.add(idPost);
+//		List<String> id = new ArrayList<String>();
+//		id.add(idPost);
 		
-		return CommentUtils.commentEntityToDTO(commentRepo.findAllById(id));
+		return CommentUtils.commentEntityToDTO(commentRepo.findByPost(idPost));
 	}
 
 	@Override
